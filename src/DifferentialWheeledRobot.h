@@ -7,8 +7,8 @@
 #include <Wheel.h>
 
 class DifferentialWheeledRobot {
-  public:
-    DifferentialWheeledRobot(float wheel_separation,float wheel_radious);
+  	public:
+	    DifferentialWheeledRobot(float wheel_separation,float wheel_radious);
 		void attachLeftWheel(Wheel * wheelLeft);
 		void attachRightWheel(Wheel * wheelRight);
 		void move(float velocity_x, float velocity_theta);
@@ -21,17 +21,16 @@ class DifferentialWheeledRobot {
 		float getVy() {return vy_;};
 		float getVtheta() {return vtheta_;};
 	protected:
-    float wheel_separation_;
-    float wheel_radious_;	
+	    float wheel_separation_;
+	    float wheel_radious_;	
 		Wheel * wheelLeft_;
 		Wheel * wheelRight_;
-  private:
+  	private:
 		float x_;
 		float y_;
  		float theta_;
 		float vx_;
 		float vy_;
-  	float vtheta_;
+  		float vtheta_;
 };
 #endif
-
