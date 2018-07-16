@@ -43,8 +43,8 @@ void DifferentialWheeledRobot::stop()
 
 void DifferentialWheeledRobot::update(float dt)
 {
-	double velocity_1  = wheelLeft_->getVelocity(dt);
-  double velocity_2  = wheelRight_->getVelocity(dt);
+	double velocity_1  = wheelLeft_->getVelocity();
+  double velocity_2  = wheelRight_->getVelocity();
 
 	#ifdef DIFFERENTIAL_WHEELED_ROBOT_DEBUG
 	Serial.print("DifferentialWheeledRobot::update:");

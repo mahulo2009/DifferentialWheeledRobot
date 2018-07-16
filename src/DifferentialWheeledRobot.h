@@ -1,7 +1,7 @@
 #ifndef Differential_Wheeled_Robot_H
 #define Differential_Wheeled_Robot_H
 
-#define DIFFERENTIAL_WHEELED_ROBOT_DEBUG 1
+//#define DIFFERENTIAL_WHEELED_ROBOT_DEBUG 1
 
 #include "Arduino.h"
 #include <Wheel.h>
