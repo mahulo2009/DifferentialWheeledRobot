@@ -90,9 +90,24 @@ void DifferentialWheeledRobot::update(float dt)
 	#endif
 }
 
-float DifferentialWheeledRobot::getDistance(int position)
+float DifferentialWheeledRobot::getDistance()
 {
   if (sonar_ != 0) {
-    return sonar_->read(0)/100.0;
+    return sonar_->read()/100.0;
   }
+}
+
+void DifferentialWheeledRobot::sonarTo(int position)
+{
+  if (sonar_ != 0) {
+    sonar_->moveTo(position);
+  }
+}
+
+float DifferentialWheeledRobot::getSonarAngle() 
+{
+  if (sonar_ != 0) {
+    return sonar_->getAngle();
+  }
+  return 0;
 }

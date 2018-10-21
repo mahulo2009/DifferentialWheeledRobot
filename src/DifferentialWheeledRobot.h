@@ -22,7 +22,10 @@ class DifferentialWheeledRobot {
 		float getVx() {return vx_;};
 		float getVy() {return vy_;};
 		float getVtheta() {return vtheta_;};
-		float getDistance(int position);
+		void sonarTo(int position);
+		float getDistance();
+		float getSonarAngle();
+		
 	protected:
 	    float wheel_separation_;
 	    float wheel_radious_;	
