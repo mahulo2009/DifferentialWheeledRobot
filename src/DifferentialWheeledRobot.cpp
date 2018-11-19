@@ -2,19 +2,17 @@
 
 DifferentialWheeledRobot::DifferentialWheeledRobot(float wheel_separation, float wheel_radious): 
 															wheel_separation_(wheel_separation),wheel_radious_(wheel_radious),
-															x_(0),y_(0),theta_(0),
-															vx_(0),vy_(0),vtheta_(0),
                               sonar_(0)
 {
 
 }
 
-void DifferentialWheeledRobot::attachLeftWheel(Wheel * wheelLeft)
+void DifferentialWheeledRobot::attachLeftWheel(WheelBase * wheelLeft)
 {
 	this->wheelLeft_= wheelLeft;
 }
 
-void DifferentialWheeledRobot::attachRightWheel(Wheel * wheelRight)
+void DifferentialWheeledRobot::attachRightWheel(WheelBase * wheelRight)
 {
 	this->wheelRight_= wheelRight;
 }
