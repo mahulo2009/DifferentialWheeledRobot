@@ -4,41 +4,36 @@ RobotFactorySingleMotor::RobotFactorySingleMotor()
 {
 }
 
-RobotBase * RobotFactorySingleMotor::buildRobot()
+RobotBase * RobotFactorySingleMotor::buildRobot(const params_t & params_robot)
 {
-    float robot_wheel_separation,robot_wheel_radious;
     //Robot
-    RobotBase * robot = new DifferentialWheeledRobot(robot_wheel_separation,robot_wheel_radious);
+    RobotBase * robot = 
+        new DifferentialWheeledRobot(params_robot.robot_wheel_separation,params_robot.robot_wheel_radious);
     return robot;
 }
 
-WheelBase * RobotFactorySingleMotor::buildWheel()
+WheelBase * RobotFactorySingleMotor::buildWheel(const params_t & params_robot,
+                                                    const params_t & params_wheel)
 {
-    float pid_kp, pid_ki, pid_kd;
-    float max_speed;
-    int encoder_ticks_per_revoloution;
-    int pin_encoder;
-    int pin_power;
-    int pin_direction;
-    int power_min,power_max;
-
-    //Pid Left
+    //Pid
     Pid * pid = new Pid();
     //pid>setMaxWindup(max_speed); //TODO
     pid->setAlpha(1.0);
-    pid->setKp(pid_kp);
-    pid->setKi(pid_ki);
-    pid->setKd(pid_kd);
+    pid->setKp(params_robot.pid_kp);
+    pid->setKi(params_robot.pid_ki);
+    pid->setKd(params_robot.pid_kd);
 
-    //Encoder Left
-    Encoder * encoder = new Encoder(encoder_ticks_per_revoloution);
-    encoder->attach(pin_encoder);
+    //Encoder
+    Encoder * encoder = new Encoder(params_robot.encoder_ticks_per_revoloution);
+    encoder->attach(params_wheel.pin_encoder);
 
-    ArduinoDutySingleMotorHardwareController * controller_left = new ArduinoDutySingleMotorHardwareController(max_speed,power_min,power_max);
-    controller_left->attachPower(pin_power);
-    controller_left->attachDirection(pin_direction);
+    //Controller
+    ArduinoDutySingleMotorHardwareController * controller_left = 
+        new ArduinoDutySingleMotorHardwareController(params_robot.max_speed,params_robot.power_min,params_robot.power_max);
+    controller_left->attachPower(params_wheel.pin_power);
+    controller_left->attachDirection(params_wheel.pin_direction);
 
-    //Wheel Left
+    //Wheel
     WheelEncoder * wheel = new WheelEncoder();
     wheel->attachController(controller_left);
     wheel->attachEncoder(encoder);

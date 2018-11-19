@@ -14,9 +14,10 @@ class RobotFactorySingleMotor : public RobotFactory {
 
         RobotFactorySingleMotor();
 
-        virtual RobotBase * buildRobot();
+        virtual RobotBase * buildRobot(const params_t & params_robot);
 
-        virtual WheelBase * buildWheel();
+        virtual WheelBase * buildWheel(const params_t & params_robot,
+                                          const params_t & params_wheel);
 
 	protected:
 

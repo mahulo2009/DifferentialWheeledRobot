@@ -1,23 +1,24 @@
 #include "RobotFactoryDualMotor.h"
 
-RobotFactoryDualMotor::RobotFactoryDualMotor(params_t params)
-{
-    this->params_ = params;
+RobotFactoryDualMotor::RobotFactoryDualMotor()
+{  
 }
 
-RobotBase * RobotFactoryDualMotor::buildRobot()
+RobotBase * RobotFactoryDualMotor::buildRobot(const params_t & params_robot)
 {
     //Robot
-    DifferentialWheeledRobot * robot = new DifferentialWheeledRobot(params_.robot_wheel_separation,params_.robot_wheel_radious);
+    DifferentialWheeledRobot * robot = 
+        new DifferentialWheeledRobot(params_robot.robot_wheel_separation,params_robot.robot_wheel_radious);
     return robot;
 }
 
-WheelBase * RobotFactoryDualMotor::buildWheel()
+WheelBase * RobotFactoryDualMotor::buildWheel(const params_t & params_robot,
+                                                    const params_t & params_wheel)
 {
     ArduinoDutyDualMotorHardwareController * controller = 
-            new ArduinoDutyDualMotorHardwareController(params_.max_speed,params_.power_min,params_.power_max);
-    controller->attachPower(params_.pin_power);
-    controller->attachDirection(params_.pin_direction_1,params_.pin_direction_2);
+            new ArduinoDutyDualMotorHardwareController(params_robot.max_speed,params_robot.power_min,params_robot.power_max);
+    controller->attachPower(params_wheel.pin_power);
+    controller->attachDirection(params_wheel.pin_direction_1,params_wheel.pin_direction_2);
 
     //Wheel Left
     Wheel * wheel = new Wheel();

@@ -32,6 +32,10 @@ class RobotBase {
 		float vy_;
   		float vtheta_;
 
+		WheelBase * wheelLeft_;
+		WheelBase * wheelRight_;
+
+
   	private:
 
 };

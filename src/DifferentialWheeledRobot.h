@@ -16,8 +16,6 @@ class DifferentialWheeledRobot : public RobotBase {
 		virtual void stop();
         virtual void update(float dt);
 
-		void attachLeftWheel(WheelBase * wheelLeft);
-		void attachRightWheel(WheelBase * wheelRight);
 		void attachSonar(Sonar * sonar);
 					
 		void sonarTo(int position);
@@ -27,8 +25,6 @@ class DifferentialWheeledRobot : public RobotBase {
 	protected:
 	    float wheel_separation_;
 	    float wheel_radious_;	
-		WheelBase * wheelLeft_;
-		WheelBase * wheelRight_;
 		Sonar * sonar_;
 };
 #endif

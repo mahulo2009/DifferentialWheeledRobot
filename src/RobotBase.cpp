@@ -8,10 +8,10 @@ RobotBase::RobotBase() 	:   x_(0),y_(0),theta_(0),
 
 void RobotBase::attachLeftWheel(WheelBase * wheelLeft)
 {
-	//TODO
+	this->wheelLeft_= wheelLeft;
 }
 
 void RobotBase::attachRightWheel(WheelBase * wheelRight)
 {
-    //TODO
+    this->wheelRight_= wheelRight;
 }

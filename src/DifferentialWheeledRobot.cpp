@@ -7,16 +7,6 @@ DifferentialWheeledRobot::DifferentialWheeledRobot(float wheel_separation, float
 
 }
 
-void DifferentialWheeledRobot::attachLeftWheel(WheelBase * wheelLeft)
-{
-	this->wheelLeft_= wheelLeft;
-}
-
-void DifferentialWheeledRobot::attachRightWheel(WheelBase * wheelRight)
-{
-	this->wheelRight_= wheelRight;
-}
-
 void DifferentialWheeledRobot::attachSonar(Sonar * sonar)
 {
   this->sonar_= sonar;
