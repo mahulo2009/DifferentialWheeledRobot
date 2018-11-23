@@ -1,37 +1,37 @@
 #include "RobotFactorySingleMotor.h"
 
-RobotFactorySingleMotor::RobotFactorySingleMotor() 
+RobotFactorySingleMotor::RobotFactorySingleMotor(RosConfigArduinoDutySingleMotor  * robot_confing) 
 {
+    this->robot_confing = robot_confing;
 }
 
-RobotBase * RobotFactorySingleMotor::buildRobot(const params_t & params_robot)
+RobotBase * RobotFactorySingleMotor::buildRobot()
 {
     //Robot
     RobotBase * robot = 
-        new DifferentialWheeledRobot(params_robot.robot_wheel_separation,params_robot.robot_wheel_radious);
+        new DifferentialWheeledRobot(robot_confing->robot_wheel_separation,robot_confing->robot_wheel_radious);
     return robot;
 }
 
-WheelBase * RobotFactorySingleMotor::buildWheel(const params_t & params_robot,
-                                                    const params_t & params_wheel)
+WheelBase * RobotFactorySingleMotor::buildWheel(int index)
 {
     //Pid
     Pid * pid = new Pid();
     //pid>setMaxWindup(max_speed); //TODO
     pid->setAlpha(1.0);
-    pid->setKp(params_robot.pid_kp);
-    pid->setKi(params_robot.pid_ki);
-    pid->setKd(params_robot.pid_kd);
+    pid->setKp(robot_confing->pid_kp);
+    pid->setKi(robot_confing->pid_ki);
+    pid->setKd(robot_confing->pid_kd);
 
     //Encoder
-    Encoder * encoder = new Encoder(params_robot.encoder_ticks_per_revoloution);
-    encoder->attach(params_wheel.pin_encoder);
+    Encoder * encoder = new Encoder(robot_confing->encoder_ticks_per_revoloution);
+    encoder->attach(robot_confing->pin_encoder);
 
     //Controller
     ArduinoDutySingleMotorHardwareController * controller_left = 
-        new ArduinoDutySingleMotorHardwareController(params_robot.max_speed,params_robot.power_min,params_robot.power_max);
-    controller_left->attachPower(params_wheel.pin_power);
-    controller_left->attachDirection(params_wheel.pin_direction);
+        new ArduinoDutySingleMotorHardwareController(robot_confing->max_speed,robot_confing->power_min,robot_confing->power_max);
+    controller_left->attachPower(robot_confing->pin_power);
+    controller_left->attachDirection(robot_confing->pin_direction);
 
     //Wheel
     WheelEncoder * wheel = new WheelEncoder();

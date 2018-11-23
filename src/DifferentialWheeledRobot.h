@@ -12,15 +12,9 @@ class DifferentialWheeledRobot : public RobotBase {
   	public:
 	    DifferentialWheeledRobot(float wheel_separation,float wheel_radious);
 
-		virtual  void move(float velocity_x, float velocity_theta);
+		virtual void move(float velocity_x, float velocity_theta);
 		virtual void stop();
         virtual void update(float dt);
-
-		void attachSonar(Sonar * sonar);
-					
-		void sonarTo(int position);
-		float getDistance();
-		float getSonarAngle();
 		
 	protected:
 	    float wheel_separation_;

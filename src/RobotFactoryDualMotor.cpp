@@ -1,24 +1,34 @@
 #include "RobotFactoryDualMotor.h"
 
-RobotFactoryDualMotor::RobotFactoryDualMotor()
+RobotFactoryDualMotor::RobotFactoryDualMotor(RosConfigArduinoDutyDualMotor * robot_confing) 
 {  
+    this->robot_confing = robot_confing;
 }
 
-RobotBase * RobotFactoryDualMotor::buildRobot(const params_t & params_robot)
+RobotBase * RobotFactoryDualMotor::buildRobot()
 {
     //Robot
     DifferentialWheeledRobot * robot = 
-        new DifferentialWheeledRobot(params_robot.robot_wheel_separation,params_robot.robot_wheel_radious);
+        new DifferentialWheeledRobot(robot_confing->robot_wheel_separation,robot_confing->robot_wheel_radious);
     return robot;
 }
 
-WheelBase * RobotFactoryDualMotor::buildWheel(const params_t & params_robot,
-                                                    const params_t & params_wheel)
+WheelBase * RobotFactoryDualMotor::buildWheel(int index)
 {
     ArduinoDutyDualMotorHardwareController * controller = 
-            new ArduinoDutyDualMotorHardwareController(params_robot.max_speed,params_robot.power_min,params_robot.power_max);
-    controller->attachPower(params_wheel.pin_power);
-    controller->attachDirection(params_wheel.pin_direction_1,params_wheel.pin_direction_2);
+            new ArduinoDutyDualMotorHardwareController(robot_confing->max_speed,robot_confing->power_min,robot_confing->power_max);
+
+    if ( index == 0 )  
+    {
+        controller->attachPower(robot_confing->pin_power_left);
+        controller->attachDirection(robot_confing->pin_direction_left_1,robot_confing->pin_direction_left_2);
+    } 
+    else 
+    {
+        controller->attachPower(robot_confing->pin_power_right);
+        controller->attachDirection(robot_confing->pin_direction_right_1,robot_confing->pin_direction_right_2);
+
+    }
 
     //Wheel Left
     Wheel * wheel = new Wheel();

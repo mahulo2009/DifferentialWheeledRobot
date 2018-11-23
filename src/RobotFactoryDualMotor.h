@@ -4,6 +4,7 @@
 #include "RobotFactory.h"
 #include "Wheel.h"
 #include "ArduinoDutyDualMotorHardwareController.h"
+#include "RosConfigArduinoDutyDualMotor.h"
 #include "DifferentialWheeledRobot.h"
 
 
@@ -11,15 +12,15 @@ class RobotFactoryDualMotor : public RobotFactory {
 
   	public:
 
-        RobotFactoryDualMotor();
+        RobotFactoryDualMotor(RosConfigArduinoDutyDualMotor * robot_confing);
 
-        virtual RobotBase * buildRobot(const params_t & params_robot);
+        virtual RobotBase * buildRobot();
 
-        virtual WheelBase * buildWheel(const params_t & params_robot,
-                                          const params_t & params_wheel);
+        virtual WheelBase * buildWheel(int index);
 
 	protected:
 
+            RosConfigArduinoDutyDualMotor * robot_confing;
   	
 };
 #endif

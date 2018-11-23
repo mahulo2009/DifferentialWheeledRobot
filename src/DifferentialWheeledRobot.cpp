@@ -7,11 +7,6 @@ DifferentialWheeledRobot::DifferentialWheeledRobot(float wheel_separation, float
 
 }
 
-void DifferentialWheeledRobot::attachSonar(Sonar * sonar)
-{
-  this->sonar_= sonar;
-}
-
 void DifferentialWheeledRobot::move(float velocity_x, float velocity_theta)
 {
   double velocity_1  = ( velocity_x + velocity_theta * wheel_separation_) / ( wheel_radious_ ) ;
@@ -76,26 +71,4 @@ void DifferentialWheeledRobot::update(float dt)
   Serial.print(theta_);
   Serial.print("\n");
 	#endif
-}
-
-float DifferentialWheeledRobot::getDistance()
-{
-  if (sonar_ != 0) {
-    return sonar_->read()/100.0;
-  }
-}
-
-void DifferentialWheeledRobot::sonarTo(int position)
-{
-  if (sonar_ != 0) {
-    sonar_->moveTo(position);
-  }
-}
-
-float DifferentialWheeledRobot::getSonarAngle() 
-{
-  if (sonar_ != 0) {
-    return sonar_->getAngle();
-  }
-  return 0;
 }

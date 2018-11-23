@@ -7,20 +7,22 @@
 #include "WheelEncoder.h"
 #include "ArduinoDutySingleMotorHardwareController.h"
 #include "DifferentialWheeledRobot.h"
+#include "RosConfigArduinoDutySingleMotor.h"
 
 class RobotFactorySingleMotor : public RobotFactory {
 
   	public:
 
-        RobotFactorySingleMotor();
+            RobotFactorySingleMotor(RosConfigArduinoDutySingleMotor  * robot_confing);
 
-        virtual RobotBase * buildRobot(const params_t & params_robot);
+            virtual RobotBase * buildRobot();
 
-        virtual WheelBase * buildWheel(const params_t & params_robot,
-                                          const params_t & params_wheel);
+            virtual WheelBase * buildWheel(int index);
 
 	protected:
 
   	private:
+
+            RosConfigArduinoDutySingleMotor * robot_confing;
 };
 #endif
