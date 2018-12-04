@@ -8,30 +8,22 @@ RobotFactoryDualMotor::RobotFactoryDualMotor(RosConfigArduinoDutyDualMotor * rob
 RobotBase * RobotFactoryDualMotor::buildRobot()
 {
     //Robot
-    DifferentialWheeledRobot * robot = 
+    RobotBase * robot = 
         new DifferentialWheeledRobot(robot_confing->robot_wheel_separation,robot_confing->robot_wheel_radious);
     return robot;
 }
 
 WheelBase * RobotFactoryDualMotor::buildWheel(int index)
-{
+{    
+    //Controller
     ArduinoDutyDualMotorHardwareController * controller = 
             new ArduinoDutyDualMotorHardwareController(robot_confing->max_speed,robot_confing->power_min,robot_confing->power_max);
 
-    if ( index == 0 )  
-    {
-        controller->attachPower(robot_confing->pin_power_left);
-        controller->attachDirection(robot_confing->pin_direction_left_1,robot_confing->pin_direction_left_2);
-    } 
-    else 
-    {
-        controller->attachPower(robot_confing->pin_power_right);
-        controller->attachDirection(robot_confing->pin_direction_right_1,robot_confing->pin_direction_right_2);
+    controller->attachPower(robot_confing->wheel_config[index].pin_power);
+    controller->attachDirection(robot_confing->wheel_config[index].pin_direction_1,robot_confing->wheel_config[index].pin_direction_2);
 
-    }
-
-    //Wheel Left
-    Wheel * wheel = new Wheel();
+    //Wheel
+    WheelBase * wheel = new Wheel();
     wheel->attachController(controller);
 
     return wheel;

@@ -25,17 +25,18 @@ WheelBase * RobotFactorySingleMotor::buildWheel(int index)
 
     //Encoder
     Encoder * encoder = new Encoder(robot_confing->encoder_ticks_per_revoloution);
-    encoder->attach(robot_confing->pin_encoder);
+    encoder->attach(robot_confing->wheel_config[index].pin_encoder);
 
     //Controller
-    ArduinoDutySingleMotorHardwareController * controller_left = 
+    ArduinoDutySingleMotorHardwareController * controller = 
         new ArduinoDutySingleMotorHardwareController(robot_confing->max_speed,robot_confing->power_min,robot_confing->power_max);
-    controller_left->attachPower(robot_confing->pin_power);
-    controller_left->attachDirection(robot_confing->pin_direction);
+    
+    controller->attachPower(robot_confing->wheel_config[index].pin_power);
+    controller->attachDirection(robot_confing->wheel_config[index].pin_direction);
 
     //Wheel
     WheelEncoder * wheel = new WheelEncoder();
-    wheel->attachController(controller_left);
+    wheel->attachController(controller);
     wheel->attachEncoder(encoder);
     wheel->attachPid(pid);
 
