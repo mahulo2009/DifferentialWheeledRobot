@@ -19,7 +19,7 @@ class RosConfigArduinoDutyDualMotor : public RosConfigBase {
             virtual void read(ros::NodeHandle &nh);
 
             float max_speed;
-            int power_min;
+            int power_min;  //
             int power_max;
             float robot_wheel_separation;
             float robot_wheel_radious; 
